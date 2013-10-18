@@ -1,4 +1,4 @@
-package com.atreceno.it;
+package com.atreceno.it.javanese.maths;
 
 /**
  * Hello world!

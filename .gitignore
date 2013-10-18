@@ -4,3 +4,12 @@
 *.jar
 *.war
 *.ear
+/target
+
+# Eclise IDE #
+/.classpath
+/.project
+/.settings
+
+# Mac OS X #
+.DS_Store
