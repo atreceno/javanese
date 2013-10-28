@@ -1,4 +1,4 @@
-package com.atreceno.it.javanese.maths;
+package com.atreceno.it.javanese.attic;
 
 import java.math.BigInteger;
 
@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import com.atreceno.it.javanese.attic.FactorialIteration;
 
 /**
  * Unit test for simple App.

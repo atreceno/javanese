@@ -1,8 +1,8 @@
-package com.atreceno.it.javanese.maths;
+package com.atreceno.it.javanese.attic;
 
 import java.math.BigInteger;
 
-public class Benchmark {
+public class FactorialBenchmark {
 
 	public static void main(String[] args) {
 

@@ -1,4 +1,4 @@
-package com.atreceno.it.javanese.maths;
+package com.atreceno.it.javanese.attic;
 
 import java.math.BigInteger;
 
