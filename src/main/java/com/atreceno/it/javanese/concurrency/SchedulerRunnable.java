@@ -7,7 +7,8 @@ public class SchedulerRunnable {
 
 	private static final int NUM_OF_THREADS = 3;
 	private static final int SLEEP_MILLIS = 1000;
-	static List<Thread> threadList = new ArrayList<Thread>();
+	private static List<Thread> threadList = new ArrayList<Thread>();
+	private static Object objectToSync = new Object();
 
 	public static void main(String[] args) {
 		System.out.println("Start");
@@ -23,8 +24,8 @@ public class SchedulerRunnable {
 			System.out.println(Thread.currentThread().getName()
 					+ ":  \tNotifying thread " + i);
 			Thread thread = threadList.get(i);
-			synchronized (thread) {
-				thread.notify();
+			synchronized (objectToSync) {
+				objectToSync.notify();
 			}
 			try {
 				Thread.sleep(SLEEP_MILLIS);
@@ -42,9 +43,9 @@ public class SchedulerRunnable {
 			@Override
 			public void run() {
 				while (true) {
-					synchronized (this) {
+					synchronized (objectToSync) {
 						try {
-							wait();
+							objectToSync.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
