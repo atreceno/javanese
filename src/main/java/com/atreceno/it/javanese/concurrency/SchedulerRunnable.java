@@ -23,7 +23,6 @@ public class SchedulerRunnable {
 
 			System.out.println(Thread.currentThread().getName()
 					+ ":  \tNotifying thread " + i);
-			Thread thread = threadList.get(i);
 			synchronized (objectToSync) {
 				objectToSync.notify();
 			}
