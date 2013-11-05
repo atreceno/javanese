@@ -2,6 +2,7 @@ package com.atreceno.it.javanese.concurrency;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -26,47 +27,56 @@ public class Threshold {
 	}
 
 	public void truncate() {
-		for (Iterator<Integer> it = list.iterator(); it.hasNext();) {
-			if (it.next() < this.threshold) {
-				it.remove();
+		// for(int i = list.size() - 1; i > 0; i--) {
+		// if (list.get(i) < threshold)
+		// list.remove(i);
+		// }
+		synchronized (list) {
+			for (Iterator<Integer> it = list.iterator(); it.hasNext();) {
+				if (it.next() < threshold) {
+					it.remove();
+				}
 			}
 		}
 	}
 
 	public void audit() {
-		for (Integer value : this.list)
-			if (value < this.threshold)
-				System.out.println("ALERT!");
+		// for(int i = 0; i< list.size(); i++) {
+		// if (list.get(i) < threshold)
+		// System.out.println("ALERT!");
+		// }
+		synchronized (list) {
+			for (Integer value : list)
+				if (value < threshold)
+					System.out.println("ALERT!");
+		}
 	}
 
 	public void print() {
-		System.out.println(this.list);
-		System.out.println(this.threshold);
+		System.out.println(list);
+		System.out.println(threshold);
 	}
 
 	public static void main(String[] args) {
 
-		/*
-		 * new Threshold(3, Arrays.asList(2, 5, 2, 1, 7)) will throw an
-		 * UnsupportedOperationException
-		 */
-
 		// Initialize the list
-		List<Integer> myList = new ArrayList<Integer>(Arrays.asList(2, 5, 2, 1,
-				7, -2, 0, 8));
-		for (int i = 0; i < 1000; i++) {
+		List<Integer> myList = Collections
+				.synchronizedList(new ArrayList<Integer>(Arrays.asList(7, -2,
+						0, 8)));
+		for (int i = 0; i < 100; i++) {
 			myList.add(new Random().nextInt(100));
 		}
 
+		// Construct the class (Careful with UnsupportedOperationException)
 		Threshold t = new Threshold(90, myList);
 
 		// N truncate threads
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 4; i++) {
 			t.truncateThread(i);
 		}
 
 		// N audit threads
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 4; i++) {
 			t.auditThread(i);
 		}
 
