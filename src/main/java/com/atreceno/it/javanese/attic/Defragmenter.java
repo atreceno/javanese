@@ -101,7 +101,7 @@ public class Defragmenter {
 
 			if (idx < 0) { // Prefix
 				text = list.get(match).substring(0, -idx) + text;
-			} else if (idx > m - n) { // Suffix
+			} else if (idx > m - list.get(match).length()) { // Suffix
 				text = text + list.get(match).substring(m - idx);
 			}
 			list.remove(match);
